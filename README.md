@@ -1,2 +1,3 @@
 # iOSShared
-Shared library for iOS components for iOS client for SyncServerII
+
+A description of this package.
