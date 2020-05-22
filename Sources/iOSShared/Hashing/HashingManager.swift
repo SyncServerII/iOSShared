@@ -20,12 +20,12 @@ public class HashingManager {
         current += [hashing]
     }
     
-    public func hashFor(url: URL, accountName: String) throws -> String {
+    public func hashFor(accountName: String) throws -> CloudStorageHashing {
         let filter = current.filter { $0.accountName == accountName }
         guard filter.count == 1 else {
             throw HashingManagerError.noHasher
         }
         
-        return try filter[0].hash(forURL: url)
+        return filter[0]
     }
 }

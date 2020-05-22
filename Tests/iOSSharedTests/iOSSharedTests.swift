@@ -56,16 +56,16 @@ final class iOSSharedTests: XCTestCase {
         let manager = HashingManager()
         try manager.add(hashing: Hasher())
         let url = URL(fileURLWithPath: "foobly")
-        let _ = try manager.hashFor(url: url, accountName: "Foobly")
+        let hasher = try manager.hashFor(accountName: "Foobly")
+        let _ = try hasher.hash(forURL: url)
     }
     
     func testHashForUnknownHasherFails() throws {
         let manager = HashingManager()
         try manager.add(hashing: Hasher())
-        let url = URL(fileURLWithPath: "foobly")
         
         do {
-            let _ = try manager.hashFor(url: url, accountName: "Marbly")
+            let _ = try manager.hashFor(accountName: "Marbly")
         } catch {
             return
         }
