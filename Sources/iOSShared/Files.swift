@@ -8,8 +8,8 @@ public struct Files {
     }
     
     // Creates a temporary file within the given directory. If the URL returned, the file will have been created, and zero length upon return. Uses a UUID to form the file name and assumes there will be no collision.
-    public static func createTemporary(withPrefix prefix: String, andExtension extension: String, inDirectory directory:inout URL) throws -> URL {
-    
+    public static func createTemporary(withPrefix prefix: String, andExtension extension: String, inDirectory directory: URL) throws -> URL {
+        var directory = directory
         try createDirectoryIfNeeded(directory)
         
         // Don't let these temporary files be backed up to iCloud-- Apple doesn't like this (e.g., when reviewing apps).
