@@ -1,4 +1,5 @@
 import Foundation
+import ServerShared
 
 public class HashingManager {
     enum HashingManagerError: Error {
@@ -12,7 +13,7 @@ public class HashingManager {
     }
     
     public func add(hashing: CloudStorageHashing) throws {
-        let filter = current.filter { $0.accountName == hashing.accountName }
+        let filter = current.filter { $0.cloudStorageType == hashing.cloudStorageType }
         guard filter.count == 0 else {
             throw HashingManagerError.hasherAlreadyExists
         }
@@ -20,8 +21,8 @@ public class HashingManager {
         current += [hashing]
     }
     
-    public func hashFor(accountName: String) throws -> CloudStorageHashing {
-        let filter = current.filter { $0.accountName == accountName }
+    public func hashFor(cloudStorageType: CloudStorageType) throws -> CloudStorageHashing {
+        let filter = current.filter { $0.cloudStorageType == cloudStorageType }
         guard filter.count == 1 else {
             throw HashingManagerError.noHasher
         }

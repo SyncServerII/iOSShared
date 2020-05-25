@@ -1,9 +1,9 @@
 import Foundation
+import ServerShared
 
 // Every cloud storage type (e.g., Dropbox, Google) has to implement this protocol
 public protocol CloudStorageHashing {
-    // E.g., "Dropbox"
-    var accountName:String { get }
+    var cloudStorageType:CloudStorageType { get }
     
     func hash(forURL url: URL) throws -> String
     func hash(forData data: Data) throws -> String

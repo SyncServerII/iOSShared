@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "ServerShared",
+        "repositoryURL": "https://github.com/SyncServerII/ServerShared.git",
+        "state": {
+          "branch": "master",
+          "revision": "ac6ce14bce0a17a890486ec19f5976c08e97d25d",
+          "version": null
+        }
+      },
+      {
         "package": "swift-log",
         "repositoryURL": "https://github.com/apple/swift-log.git",
         "state": {

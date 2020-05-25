@@ -1,5 +1,6 @@
 import XCTest
 @testable import iOSShared
+import ServerShared
 
 final class iOSSharedTests: XCTestCase {
     func testTestingFile() throws {
@@ -18,13 +19,13 @@ final class iOSSharedTests: XCTestCase {
     }
     
     func testCreateTemporary() throws {
-        var docsURL = Files.getDocumentsDirectory()
-        let result = try Files.createTemporary(withPrefix: "SyncServer", andExtension: "dat", inDirectory: &docsURL)
+        let docsURL = Files.getDocumentsDirectory()
+        let result = try Files.createTemporary(withPrefix: "SyncServer", andExtension: "dat", inDirectory: docsURL)
         XCTAssert(try Files.isFile(result))
     }
     
     struct Hasher: CloudStorageHashing {
-        var accountName = "Foobly"
+        var cloudStorageType: CloudStorageType = .Dropbox
         func hash(forURL url: URL) throws -> String {
             return "stuff"
         }
@@ -56,7 +57,7 @@ final class iOSSharedTests: XCTestCase {
         let manager = HashingManager()
         try manager.add(hashing: Hasher())
         let url = URL(fileURLWithPath: "foobly")
-        let hasher = try manager.hashFor(accountName: "Foobly")
+        let hasher = try manager.hashFor(cloudStorageType: .Dropbox)
         let _ = try hasher.hash(forURL: url)
     }
     
@@ -65,7 +66,7 @@ final class iOSSharedTests: XCTestCase {
         try manager.add(hashing: Hasher())
         
         do {
-            let _ = try manager.hashFor(accountName: "Marbly")
+            let _ = try manager.hashFor(cloudStorageType: .Google)
         } catch {
             return
         }
