@@ -9,7 +9,7 @@ public class HashingManager {
     
     private var current = [CloudStorageHashing]()
     
-    init() {
+    public init() {
     }
     
     public func add(hashing: CloudStorageHashing) throws {
