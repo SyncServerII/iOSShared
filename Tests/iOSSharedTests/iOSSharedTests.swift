@@ -1,6 +1,6 @@
 import XCTest
 @testable import iOSShared
-import ServerShared
+import iOSServerShared
 
 final class iOSSharedTests: XCTestCase {
     func testTestingFile() throws {

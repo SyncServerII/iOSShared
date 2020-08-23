@@ -1,5 +1,5 @@
 import Foundation
-import ServerShared
+import iOSServerShared
 
 public class HashingManager {
     enum HashingManagerError: Error {

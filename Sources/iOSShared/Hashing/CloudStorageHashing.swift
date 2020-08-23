@@ -1,5 +1,5 @@
 import Foundation
-import ServerShared
+import iOSServerShared
 
 // Every cloud storage type (e.g., Dropbox, Google) has to implement this protocol
 public protocol CloudStorageHashing {
