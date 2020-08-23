@@ -24,7 +24,7 @@ let package = Package(
         .target(
             name: "iOSShared",
             dependencies: [
-                .product(name: "iOSServerShared", package: "ServerShared"),
+                "ServerShared",
                 "Logging"
             ]),
         .testTarget(
