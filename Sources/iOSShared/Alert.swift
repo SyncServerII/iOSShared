@@ -5,8 +5,13 @@ public struct Alert {
     
         var vc: UIViewController? = fromVC
         if vc == nil {
-            let window:UIWindow = (UIApplication.shared.delegate?.window)!!
-            vc = window.rootViewController
+            vc = UIApplication.shared.delegate?.window??.rootViewController
+            
+            // 9/27/20-- I get a nil vc above with SwiftUI. Trying:
+            // https://stackoverflow.com/questions/58548569
+            if vc == nil {
+                 vc = UIApplication.shared.windows.first?.rootViewController
+            }
         }
         
         guard let vcToUse = vc else {
