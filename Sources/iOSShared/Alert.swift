@@ -1,7 +1,7 @@
 import UIKit
 
 public struct Alert {
-    public static func show(fromVC: UIViewController? = nil, withTitle title:String? = nil, message:String? = nil, allowCancel cancel:Bool = false, okCompletion:(()->())? = nil) {
+    public static func show(fromVC: UIViewController? = nil, withTitle title:String? = nil, message:String? = nil, allowCancel cancel:Bool = false, style: UIAlertController.Style = .actionSheet, okCompletion:(()->())? = nil) {
     
         var vc: UIViewController? = fromVC
         if vc == nil {
@@ -19,7 +19,7 @@ public struct Alert {
             return
         }
         
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: style)
         alert.popoverPresentationController?.sourceView = vcToUse.view
     
         alert.addAction(UIAlertAction(title: "OK", style: .default) { alert in
