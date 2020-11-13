@@ -1,7 +1,7 @@
 import SQLite
 import Foundation
 
-enum DatabaseModelError: Error {
+public enum DatabaseModelError: Error {
     case moreThanOneRowInResult
     case notExactlyOneRowWithId
     case noId
