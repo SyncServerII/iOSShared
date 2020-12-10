@@ -8,7 +8,8 @@ public struct Files {
     }
     
     // Creates a temporary file within the given directory. If the URL returned, the file will have been created, and zero length upon return. Uses a UUID to form the file name and assumes there will be no collision.
-    public static func createTemporary(withPrefix prefix: String, andExtension extension: String, inDirectory directory: URL) throws -> URL {
+    // If create is false, doesn't actually create the file. But makes sure the file doesn't already exist.
+    public static func createTemporary(withPrefix prefix: String, andExtension extension: String, inDirectory directory: URL, create: Bool = true) throws -> URL {
         var directory = directory
         try createDirectoryIfNeeded(directory)
         
@@ -23,8 +24,15 @@ public struct Files {
         
         let newFileURL = directory.appendingPathComponent(fileName)
         
-        guard FileManager.default.createFile(atPath: newFileURL.path, contents: nil, attributes: nil) else {
-            throw FilesError.couldNotCreateFile
+        if create {
+            guard FileManager.default.createFile(atPath: newFileURL.path, contents: nil, attributes: nil) else {
+                throw FilesError.couldNotCreateFile
+            }
+        }
+        else {
+            guard !FileManager.default.fileExists(atPath: newFileURL.path) else {
+                throw FilesError.couldNotCreateFile
+            }
         }
         
         return newFileURL
