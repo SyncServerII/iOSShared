@@ -25,4 +25,6 @@ public class UserAlertModel: ObservableObject, UserAlertMessage {
             show = userAlert != nil && screenDisplayed
         }
     }
+    
+    public init() {}
 }
