@@ -13,6 +13,8 @@ public enum UserAlertContents {
     
     // With custom action button-- "Cancel" is also given.
     case customAction(title: String, message: String, actionButtonTitle:String, action:()->())
+    
+    case customDetailedAction(title: String, message: String, actionButtonTitle:String, action:()->(), cancelTitle: String, cancelAction:()->())
 }
 
 public protocol UserAlertDelegate: AnyObject {
