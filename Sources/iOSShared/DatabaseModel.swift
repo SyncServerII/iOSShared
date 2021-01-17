@@ -13,10 +13,12 @@ public enum DatabaseModelError: Error {
 public struct Field<FieldType, Model: DatabaseModel> {
     public let description:Expression<FieldType>
     public var keyPath: ReferenceWritableKeyPath<Model, FieldType>
+    public let fieldName: String
     
     public init(_ fieldName:String, _ keyPath: ReferenceWritableKeyPath<Model, FieldType>) {
         self.description = Expression<FieldType>(fieldName)
         self.keyPath = keyPath
+        self.fieldName = fieldName
     }
 }
 
