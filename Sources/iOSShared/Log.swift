@@ -16,7 +16,7 @@ public class SharedLogging {
         return fileDestination.archivedFileURLs() + [logFileURL]
     }
     
-    public func setup(logFileURL: URL, logLevel: Logging.Logger.Level = .trace, logLabel: String = "") throws {
+    public func setup(logFileURL: URL, logLevel: Logging.Logger.Level = .trace, logLabel: String = "") {
         self.logFileURL = logFileURL
         logger = createLogger(logFileURL: logFileURL, label: logLabel)
         logger.logLevel = logLevel
