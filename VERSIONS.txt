@@ -1,5 +1,8 @@
 iOSShared
 
+Version 0.2.0 (2/14/21)
+	Improved user alerts.
+	
 Version 0.1.1 (2/7/21)
 	Fix file logging issue.
 	
