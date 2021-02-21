@@ -1,5 +1,8 @@
 iOSShared
 
+Version 0.3.0 (2/20/21)
+	Added Errors protocol.
+	
 Version 0.2.0 (2/14/21)
 	Improved user alerts.
 	
