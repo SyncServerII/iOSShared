@@ -1,5 +1,8 @@
 iOSShared
 
+Version 0.4.0 (2/21/21)
+    Added NetworkReachability protocol.
+    
 Version 0.3.0 (2/20/21)
 	Added Errors protocol.
 	
