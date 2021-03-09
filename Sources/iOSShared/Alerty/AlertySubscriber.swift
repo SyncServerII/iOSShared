@@ -16,8 +16,10 @@ public class AlertySubscriber: ObservableObject {
             // If we don't constrain this by whether or not the screen is displayed, when we navigate to other screens, we get the same error, once per screen-- because each screen model has an `errorSubscription`. I don't know if having these models remain allocated is standard behavior for SwiftUI, but currently it is the case.
             let shouldShow = alert != nil && screenDisplayed
             logger.debug("didSet userAlert: shouldShow: \(shouldShow); \(String(describing: debugMessage)): userAlert: \(String(describing: self.alert)): screenDisplayed: \(screenDisplayed)")
-            DispatchQueue.main.async {
-                self.show = shouldShow
+            if self.show != shouldShow {
+                DispatchQueue.main.async {
+                    self.show = shouldShow
+                }
             }
         }
     }
