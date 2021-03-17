@@ -1,5 +1,8 @@
 iOSShared
 
+Version 0.6.0 (3/17/21)
+	Added NetworkRequestable protocol.
+	
 Version 0.5.0 (3/8/21)
 	Add check for `show` change to AlertySubscriber
 
