@@ -8,6 +8,6 @@
 import Foundation
 
 public protocol NetworkRequestable {
-    // Is the app in a state where it can make network requests?
+    // Is the app and the network in a state where network requests can be made?
     var canMakeNetworkRequests: Bool { get }
 }
