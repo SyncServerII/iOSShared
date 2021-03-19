@@ -20,11 +20,11 @@ class iOSSharedBackgroundTask: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testMainAppBackgroundTask() throws {
+    func testSyncMainAppBackgroundTask() throws {
         let backgroundAsssertable: BackgroundAsssertable = mainAppBackgroundTask
         
         var result: URL?
-        result = try? backgroundAsssertable.run { ()->(URL?) in
+        result = try? backgroundAsssertable.syncRun { ()->(URL?) in
             let docsURL = Files.getDocumentsDirectory()
             do {
                 return try Files.createTemporary(withPrefix: "SyncServer", andExtension: "dat", inDirectory: docsURL)
@@ -39,11 +39,33 @@ class iOSSharedBackgroundTask: XCTestCase {
         XCTAssert(result != nil)
     }
     
-   func testExtensionBackgroundTask() throws {
+    func testAsyncMainAppBackgroundTask() throws {
+        let backgroundAsssertable: BackgroundAsssertable = mainAppBackgroundTask
+        
+        let exp = expectation(description: "exp")
+        
+        backgroundAsssertable.asyncRun { completion in
+            let docsURL = Files.getDocumentsDirectory()
+            do {
+                _ = try Files.createTemporary(withPrefix: "SyncServer", andExtension: "dat", inDirectory: docsURL)
+            } catch let error {
+                XCTFail("\(error)")
+            }
+            
+            completion()
+            exp.fulfill()
+        } expiry: {
+            XCTFail()
+        }
+        
+        waitForExpectations(timeout: 10, handler: nil)
+    }
+    
+    func testSyncExtensionBackgroundTask() throws {
         let backgroundAsssertable: BackgroundAsssertable = extensionBackgroundTask
         
         var result: URL?
-        result = try? backgroundAsssertable.run { ()->(URL?) in
+        result = try? backgroundAsssertable.syncRun { ()->(URL?) in
             let docsURL = Files.getDocumentsDirectory()
             do {
                 return try Files.createTemporary(withPrefix: "SyncServer", andExtension: "dat", inDirectory: docsURL)
@@ -56,5 +78,27 @@ class iOSSharedBackgroundTask: XCTestCase {
         }
         
         XCTAssert(result != nil)
+    }
+    
+    func testAsyncExtensionBackgroundTask() throws {
+        let backgroundAsssertable: BackgroundAsssertable = extensionBackgroundTask
+        
+        let exp = expectation(description: "exp")
+        
+        backgroundAsssertable.asyncRun { completion in
+            let docsURL = Files.getDocumentsDirectory()
+            do {
+                _ = try Files.createTemporary(withPrefix: "SyncServer", andExtension: "dat", inDirectory: docsURL)
+            } catch let error {
+                XCTFail("\(error)")
+            }
+            
+            completion()
+            exp.fulfill()
+        } expiry: {
+            XCTFail()
+        }
+        
+        waitForExpectations(timeout: 10, handler: nil)
     }
 }
