@@ -24,7 +24,7 @@ class iOSSharedBackgroundTask: XCTestCase {
         let backgroundAsssertable: BackgroundAsssertable = mainAppBackgroundTask
         
         var result: URL?
-        result = backgroundAsssertable.run { ()->(URL?) in
+        result = try? backgroundAsssertable.run { ()->(URL?) in
             let docsURL = Files.getDocumentsDirectory()
             do {
                 return try Files.createTemporary(withPrefix: "SyncServer", andExtension: "dat", inDirectory: docsURL)
@@ -43,7 +43,7 @@ class iOSSharedBackgroundTask: XCTestCase {
         let backgroundAsssertable: BackgroundAsssertable = extensionBackgroundTask
         
         var result: URL?
-        result = backgroundAsssertable.run { ()->(URL?) in
+        result = try? backgroundAsssertable.run { ()->(URL?) in
             let docsURL = Files.getDocumentsDirectory()
             do {
                 return try Files.createTemporary(withPrefix: "SyncServer", andExtension: "dat", inDirectory: docsURL)

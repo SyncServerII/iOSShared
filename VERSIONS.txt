@@ -1,5 +1,8 @@
 iOSShared
 
+Version 0.7.1 (3/18/21)
+	Improve error handling in BackgroundAsssertable.
+	
 Version 0.7.0 (3/18/21)
 	Added BackgroundAsssertable.
 
