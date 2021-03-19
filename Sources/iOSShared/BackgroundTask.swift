@@ -18,7 +18,7 @@ public protocol BackgroundAsssertable {
 
     // Similar, but `task` runs asynhronously.
     // The async `task` must call the `completion` when it's done.
-    func asyncRun(task: @escaping (_ completion:()->())->(), expiry: (()->())?)
+    func asyncRun(task: @escaping (_ completion: @escaping ()->())->(), expiry: (()->())?)
 }
 
 public class MainAppBackgroundTask: BackgroundAsssertable {
@@ -48,7 +48,7 @@ public class MainAppBackgroundTask: BackgroundAsssertable {
         return result
     }
     
-    public func asyncRun(task: @escaping (_ completion:()->())->(), expiry: (()->())?) {
+    public func asyncRun(task: @escaping (_ completion: @escaping ()->())->(), expiry: (()->())?) {
         let identifier = start() {
             expiry?()
         }
@@ -103,7 +103,7 @@ public class ExtensionBackgroundTask: BackgroundAsssertable {
         return result
     }
     
-    public func asyncRun(task: @escaping (_ completion:()->())->(), expiry: (()->())?) {
+    public func asyncRun(task: @escaping (_ completion: @escaping ()->())->(), expiry: (()->())?) {
         let identifier = UUID()
         
         // This method queues block for asynchronous execution on a concurrent queue.
