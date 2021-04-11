@@ -1,5 +1,8 @@
 iOSShared
 
+Version 0.11.0 (4/11/21)
+    Enabling alert messages to be queued and displayed one after another.
+    
 Version 0.10.0 (4/3/21)
     Added AppState
     
