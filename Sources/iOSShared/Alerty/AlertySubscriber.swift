@@ -16,9 +16,9 @@ public class AlertySubscriber: ObservableObject {
             // Execute all of the below on the main queue to avoid race conditions with setting show to true.
             DispatchQueue.main.async {
                 // If we don't constrain this by whether or not the screen is displayed, when we navigate to other screens, we get the same error, once per screen-- because each screen model has an `errorSubscription`. I don't know if having these models remain allocated is standard behavior for SwiftUI, but currently it is the case.
-                let shouldShow = self.alertQueue.count > 0 && self.screenDisplayed && !self.show
+                let shouldShow = self.alertQueue.count > 0 && self.screenDisplayed && self.show == nil
                 if shouldShow {
-                    self.show = true
+                    self.show = self.getAlert()
                 }
             }
         }
@@ -26,14 +26,14 @@ public class AlertySubscriber: ObservableObject {
     
     let debugMessage: String?
     public var screenDisplayed = false
-    @Published public var show = false {
+    @Published public var show:AlertyContents? {
         didSet {
             // Doing a dispatch here as there seems to be need to be a delay to actually display the next message if there is one. And to avoid a race condition in setting `show`.
             DispatchQueue.main.async {
-                let shouldShowNext = self.alertQueue.count > 0 && self.screenDisplayed && !self.show
-                logger.debug("shouldShowNext: \(shouldShowNext), alertQueue.count: \(self.alertQueue.count), screenDisplayed: \(self.screenDisplayed), show: \(self.show)")
+                let shouldShowNext = self.alertQueue.count > 0 && self.screenDisplayed && self.show == nil
+                logger.debug("shouldShowNext: \(shouldShowNext), alertQueue.count: \(self.alertQueue.count), screenDisplayed: \(self.screenDisplayed), show: \(String(describing: self.show))")
                 if shouldShowNext {
-                    self.show = true
+                    self.show = self.getAlert()
                 }
             }
         }
@@ -50,15 +50,15 @@ public class AlertySubscriber: ObservableObject {
         })
     }
     
-    func getAlert() -> SwiftUI.Alert {
+    func getAlert() -> AlertyContents {
         if alertQueue.count > 0 {
             let head = alertQueue[0]
             alertQueue.removeFirst()
-            return head.alert
+            return head
         }
         else {
             logger.error("Unknown alert")
-            return SwiftUI.Alert(title: Text("Unknown Alert"))
+            return AlertyContents(SwiftUI.Alert(title: Text("Unknown Alert")))
         }
     }
 }

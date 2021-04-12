@@ -9,7 +9,8 @@ import Foundation
 import SwiftUI
 import Combine
 
-public struct AlertyContents: CustomDebugStringConvertible {
+public struct AlertyContents: CustomDebugStringConvertible, Identifiable {
+    public let id = UUID()
     public let alert: SwiftUI.Alert
     
     public var debugDescription: String {

@@ -9,12 +9,9 @@ import Foundation
 import SwiftUI
 
 extension View {
-    public func alertyDisplayer(show: Binding<Bool>, subscriber: AlertySubscriber) -> some View {
-        self
-        .alert(isPresented: show) {
-            let result = subscriber.getAlert()
-            logger.debug("About to show: \(result)")
-            return result
+    public func alertyDisplayer(show: Binding<AlertyContents?>, subscriber: AlertySubscriber) -> some View {
+        self.alert(item: show) { (alertyContents) -> SwiftUI.Alert in
+            alertyContents.alert
         }
         .onAppear() {
             subscriber.screenDisplayed = true
