@@ -1,11 +1,13 @@
 iOSShared
 
+Version 0.13.0 (5/8/21)
+    Add database migration support.
+
 Version 0.12.0 (4/15/21)
 	Added NetworkRequestOptions to NetworkRequestable
 
 Version 0.11.1 (4/11/21)
-	Trying to improve alert messages so "Unknown Alert" doesn't get displayed.    
-    
+	Trying to improve alert messages so "Unknown Alert" doesn't get displayed.
 Version 0.11.0 (4/11/21)
     Enabling alert messages to be queued and displayed one after another.
     

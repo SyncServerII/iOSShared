@@ -53,6 +53,11 @@ public extension DatabaseModel {
         })
     }
     
+    /// Add a column to the table. It must not be present already.
+    static func addColumn<V: Value>(db: Connection, column: Expression<V?>) throws {
+        try db.run(table.addColumn(column))
+    }
+    
     // Assigns the resulting row id to the model. SQLite automatically puts the id into the inserted row as well. Seems to do this just as a result of having an id column.
     func doInsertRow(db: Connection, values: SQLite.Setter...) throws {
         let row = Self.table.insert(values)
