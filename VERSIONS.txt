@@ -1,5 +1,8 @@
 iOSShared
 
+Version 0.14.0 (5/15/21)
+	Improve database migration protocols.
+
 Version 0.13.0 (5/8/21)
     Add database migration support.
 

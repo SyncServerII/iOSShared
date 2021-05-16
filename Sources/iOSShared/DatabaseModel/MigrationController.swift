@@ -31,15 +31,17 @@ public class MigrationObject: Migration {
 enum MigrationError: Error {
     case noSchemaVersion
 }
-    
-public protocol MigrationController: AnyObject {
-    var db: Connection { get }
-    
+
+public protocol MigrationRunner {
+    func run(migrations: [Migration]) throws
+}
+
+public protocol VersionedMigrationRunner: MigrationRunner {
     /// This must be persistently stored; i.e., across app launches it must retain its value. Should return 0 if not initialized. The optional value is provided only to deal with errors.
     static var schemaVersion: Int32? { get set }
 }
 
-extension MigrationController {
+extension VersionedMigrationRunner {
     public func run(migrations: [Migration]) throws {
         guard let schemaVersion = Self.schemaVersion else {
             logger.error("No schema version")
