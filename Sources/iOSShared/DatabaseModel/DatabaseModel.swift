@@ -2,7 +2,7 @@ import SQLite
 import Foundation
 
 public enum DatabaseModelError: Error {
-    case moreThanOneRowInResult
+    case moreThanOneRowInResult(String)
     case notExactlyOneRowWithId
     case noId
     case notExactlyOneRowUpdated
@@ -122,7 +122,7 @@ public extension DatabaseModel {
         }
         
         if count > 1 {
-            throw DatabaseModelError.moreThanOneRowInResult
+            throw DatabaseModelError.moreThanOneRowInResult("\(`where`)")
         }
         
         return result

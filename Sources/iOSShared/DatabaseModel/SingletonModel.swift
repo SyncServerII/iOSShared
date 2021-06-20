@@ -27,7 +27,7 @@ public extension SingletonModel {
             try singleton.insert()
             
         default:
-            throw DatabaseModelError.moreThanOneRowInResult
+            throw DatabaseModelError.moreThanOneRowInResult("setupSingleton")
         }
     }
     
