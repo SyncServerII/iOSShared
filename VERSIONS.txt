@@ -1,5 +1,8 @@
 iOSShared
 
+Version 0.14.2 (7/1/21)
+	Added `addColumn` method.
+    
 Version 0.14.1 (6/20/21)
 	Added debugging info to `moreThanOneRowInResult`.
 
