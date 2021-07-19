@@ -1,5 +1,8 @@
 iOSShared
 
+Version 0.15.0 (7/18/21)
+    Added onDismiss to sheetyDisplayer.
+    
 Version 0.14.2 (7/1/21)
 	Added `addColumn` method.
     
