@@ -42,7 +42,9 @@ public protocol VersionedMigrationRunner: MigrationRunner {
 }
 
 extension VersionedMigrationRunner {
-    public func run(migrations: [Migration]) throws {
+    // migrations: These are for column additions (and possibly deletions) only. See https://github.com/SyncServerII/Neebla/issues/26
+    // contentChanges: These are for row content changes. They are applied after *all* `migrations` have been applied, starting with the original schemaVersion (before any `migrations` had been applied).
+    public func run(migrations: [Migration], contentChanges: [Migration] = []) throws {
         guard let schemaVersion = Self.schemaVersion else {
             logger.error("No schema version")
             throw MigrationError.noSchemaVersion
@@ -57,7 +59,15 @@ extension VersionedMigrationRunner {
             
             maxVersion = max(maxVersion, migration.version)
         }
-        
+
+        for migration in contentChanges {
+            if schemaVersion < migration.version {
+                try migration.apply()
+            }
+            
+            maxVersion = max(maxVersion, migration.version)
+        }
+
         Self.schemaVersion = maxVersion
     }
 }
