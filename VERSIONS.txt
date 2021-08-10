@@ -1,5 +1,8 @@
 iOSShared
 
+Version 0.16.1 (8/9/21)
+	Fix migration runner protocol issue.
+
 Version 0.16.0 (8/9/21)
 	Separate out content changes in the migration runner. See https://github.com/SyncServerII/Neebla/issues/26
 	

@@ -33,7 +33,7 @@ enum MigrationError: Error {
 }
 
 public protocol MigrationRunner {
-    func run(migrations: [Migration]) throws
+    func run(migrations: [Migration], contentChanges: [Migration]) throws
 }
 
 public protocol VersionedMigrationRunner: MigrationRunner {
