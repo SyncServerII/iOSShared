@@ -1,5 +1,8 @@
 iOSShared
 
+Version 0.17.0 (8/13/21)
+    Moved URL+Extras here from iOSBasics.
+    
 Version 0.16.1 (8/9/21)
 	Fix migration runner protocol issue.
 
