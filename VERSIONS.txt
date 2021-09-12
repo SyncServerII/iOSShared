@@ -1,5 +1,8 @@
 iOSShared
 
+Version 0.17.1 (9/12/21)
+    Added SwiftUI ?? operator.
+    
 Version 0.17.0 (8/13/21)
     Moved URL+Extras here from iOSBasics.
     
