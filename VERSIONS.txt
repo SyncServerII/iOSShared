@@ -1,5 +1,8 @@
 iOSShared
 
+Version 0.17.2 (2/12/22)
+    Added message string to enum for exception.
+    
 Version 0.17.1 (9/12/21)
     Added SwiftUI ?? operator.
     

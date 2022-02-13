@@ -35,7 +35,7 @@ public extension SingletonModel {
         let singleton = try Self.fetch(db: db)
         
         guard singleton.count == 1 else {
-            throw DatabaseModelError.notExactlyOneRow
+            throw DatabaseModelError.notExactlyOneRow(message: "getSingleton: singleton.count: \(singleton.count)")
         }
         
         return singleton[0]
